@@ -11,7 +11,6 @@ contract Fund is ERC20, Ownable{
     address[] tokens;
 
     mapping(address=>address) priceFeeds;
-    mapping(address=>bool) isRegistered;
 
     uint256 constant UNIT = 10**18;
 
@@ -25,10 +24,6 @@ contract Fund is ERC20, Ownable{
         _addToken(address(denominationAsset));
     }
 
-    modifier onlyRegistered(address _adapter){
-         require(isRegistered[_adapter], "Not registered");
-         _;
-    }
 
     /// @notice Adds a token to be tracked by the fund
     /// @param _token The token's address
@@ -56,13 +51,6 @@ contract Fund is ERC20, Ownable{
         }
     }
 
-
-    /// @notice Modifies the adapters registry by mapping adapters to boolean values
-    /// @param _adapter the adapter to white/blacklist
-    /// @param _value the value to map the adapter to
-    function modifyRegistry(address _adapter, bool _value) external onlyOwner{
-        isRegistered[_adapter] = _value;
-    }
 
     function modifyPriceFeeds(address _token, address _priceFeed) external onlyOwner{
         priceFeeds[_token] = _priceFeed;
@@ -104,7 +92,7 @@ contract Fund is ERC20, Ownable{
     /// @param _inToken the token to receive
     /// @param _target the address of the adapter. Must be whitelisted
     /// @param _data the data for the call to the adapter
-    function manage(address _outToken, uint _amount, address _inToken, address _target, bytes calldata _data) external onlyOwner onlyRegistered(_target){
+    function manage(address _outToken, uint _amount, address _inToken, address _target, bytes calldata _data) external onlyOwner {
 
         uint valueBefore = estimate();
 

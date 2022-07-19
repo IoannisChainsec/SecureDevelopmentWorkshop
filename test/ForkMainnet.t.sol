@@ -63,8 +63,7 @@ contract ForkMainnetTests is Test {
     }
 
     function testUSDT() public {
-        //Your code goes here...
-
+        // Your code goes here
     }
 
     function testWithdrawal() public {
