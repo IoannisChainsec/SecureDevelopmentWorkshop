@@ -1,10 +1,12 @@
 # Secure DeFi smart contract development on Ethereum
 
-## Alchemy
+## Setup
+
+### Alchemy
 
 Create an API key for Alchemy by creating a new app.
 
-## Docker or install Foundry
+### Docker or install Foundry
 
 For Docker:
 
