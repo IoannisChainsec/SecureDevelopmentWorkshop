@@ -18,10 +18,6 @@ contract Fund is ERC20, Ownable{
     uint constant public FEE = 300;
     uint constant public BPS = 10000;
 
-    //address DELEGATE_APPROVALS = 0x15fd6e554874B9e70F832Ed37f231Ac5E142362f;
-    address SETH = 0x5e74C9036fb86BD7eCdcb084a0673EFc32eA31cb;
-    //address AETH = 0x030bA81f1c18d280636F32af80b9AAd02Cf0854e;
-
     address immutable denominationAsset;
 
     constructor(string memory _name, string memory _symbol, address _denominationAsset) ERC20(_name, _symbol){
@@ -112,16 +108,12 @@ contract Fund is ERC20, Ownable{
 
         uint valueBefore = estimate();
 
-        //BUG if we put it before esitmation
-        //IERC20(outToken).transfer(target, amount);
-
         (bool success, bytes memory data) = address(_target).delegatecall(_data);
         require(success);
 
         isToken[_inToken] = true;
         require(_inToken == denominationAsset || priceFeeds[_inToken] != address(0), "No price feed");
 
-        //BUG, duplication
         tokens.push(_inToken);
 
         uint valueAfter = estimate();
@@ -150,11 +142,6 @@ contract Fund is ERC20, Ownable{
         uint256 rateUpdatedAt;
 
         IChainLinkAggregatorV3 aggregator = IChainLinkAggregatorV3(priceFeeds[_token]);
-
-        //HACK avoid querying a price feed for 1:1 assets with denomination e.g., ETH and SETH
-        if (address(aggregator) == address(0x1)){
-            return _amount;
-        }
 
         (, rate, , , ) = IChainLinkAggregatorV3(aggregator).latestRoundData();
 
