@@ -57,17 +57,14 @@ contract IntegrationTests is Test {
 
     function testDeposit() public {
 
-        vm.prank(alice);
+        vm.startPrank(alice);
+        uint alice_weth_pre = IWETH(weth).balanceOf(alice);
         fund.deposit(UNIT);
-
         uint alice_balance = fund.balanceOf(alice);
+        fund.withdraw(alice_balance);
+        uint alice_weth_post = IWETH(weth).balanceOf(alice);
 
-        // bob deposit another amount
-        vm.prank(bob);
-        fund.deposit(UNIT);
-        uint bob_balance = fund.balanceOf(bob);
-
-        assertEq(alice_balance*fund.pricePerShare(), bob_balance*fund.pricePerShare());
+        assertEq((alice_weth_pre - alice_weth_post)*fund.BPS(), UNIT * fund.FEE());
     }
 
     // Remember we have setup 3 accounts already:

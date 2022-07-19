@@ -15,8 +15,8 @@ contract Fund is ERC20, Ownable{
 
     uint256 constant UNIT = 10**18;
 
-    uint constant FEE = 300;
-    uint constant BPS = 10000;
+    uint constant public FEE = 300;
+    uint constant public BPS = 10000;
 
     //address DELEGATE_APPROVALS = 0x15fd6e554874B9e70F832Ed37f231Ac5E142362f;
     address SETH = 0x5e74C9036fb86BD7eCdcb084a0673EFc32eA31cb;
@@ -83,9 +83,8 @@ contract Fund is ERC20, Ownable{
             _mint(owner(), UNIT / 10);
         } else {
             uint amountToMint = totalSupply() * _amount / totalValue;
-            _mint(msg.sender, amountToMint);
-            //Mint fees by diluting the shares
             uint fees = amountToMint * FEE / BPS;
+            _mint(msg.sender, amountToMint-fees);
             _mint(owner(), fees);
         }
     }
