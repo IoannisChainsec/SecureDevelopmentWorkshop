@@ -4,7 +4,8 @@
 
 ### Alchemy
 
-Create an API key for Alchemy by creating a new app.
+* Go to [Alchemy](ttps://dashboard.alchemyapi.io/).
+* Create an API key for Alchemy by creating a new app.
 
 ### Docker or install Foundry
 
@@ -18,11 +19,13 @@ For [Foundry](https://github.com/foundry-rs/foundry):
 
 ``curl -L https://foundry.paradigm.xyz | bash``
 
-and then run ``foundryup``.
+and then restart your terminal and run ``foundryup``.
+
+### Last Step
 
 You should be able to run successfully the following command:
 
-``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> -vvvvv --match Fork``
+``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> --match Fork``
 
 ## Foundry Cheatsheet
 
@@ -37,4 +40,4 @@ You should be able to run successfully the following command:
 
 ### Mainnet fork
 
-* ``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> -vvvvv --match <test_name>``
+* ``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> --match <test_name>``

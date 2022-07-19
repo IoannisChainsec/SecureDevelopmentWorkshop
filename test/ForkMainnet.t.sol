@@ -60,16 +60,13 @@ contract ForkMainnetTests is Test {
 
         vm.prank(USDT_OWNER);
         ERC20(USDT).safeTransfer(address(fund), UNIT/10**12);
-
     }
 
-    // Check ForkBaseTest.sol to see the new setup 
     function testUSDT() public {
         //Your code goes here...
 
     }
 
-    // Check ForkBaseTest.sol to see the new setup 
     function testWithdrawal() public {
         //prepare call
         string memory sUSD = "sUSD";
