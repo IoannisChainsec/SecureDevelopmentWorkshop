@@ -20,6 +20,10 @@ For [Foundry](https://github.com/foundry-rs/foundry):
 
 and then run ``foundryup``.
 
+You should be able to run successfully the following command:
+
+``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> -vvvvv --match Fork``
+
 ## Foundry Cheatsheet
 
 * ``vm.prank(address)``: execute the next call as an arbitrary address
@@ -33,4 +37,4 @@ and then run ``foundryup``.
 
 ### Mainnet fork
 
-* ``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API> -vvvvv --match <test_name>``
+* ``forge test --fork-url https://eth-mainnet.alchemyapi.io/v2/<API_KEY> -vvvvv --match <test_name>``
